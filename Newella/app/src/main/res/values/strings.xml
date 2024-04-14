@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Newella</string>
+
+    <string name="registration">Регистрация</string>
+    <string name="auth">Авторизация</string>
+    <string name="welcome">Добро пожаловать!</string>
+
+    <string name="wrong_name">Имя должно быть длиннее двух</string>
+    <string name="enter_name">Введите имя</string>
+    <string name="wrong_emeil">Неправильная почта</string>
+    <string name="enter_email">Введите почту</string>
+    <string name="wrong_password">Неправильный пароль</string>
+    <string name="enter_password">Введите пароль</string>
+    <string name="to_auth">Есть аккаунт? Войдите!</string>
+    <string name="to_reg">Нет аккаунта? Зарегистрируйтесь!</string>
+
+    <string name="library">Библиотека</string>
+    <string name="continue_reading">Продолжить читать</string>
+    <string name="continue_creating">Продолжить создавать</string>
+    <string name="rectangle1">Серый прямоугольник</string>
+
+
+</resources>
