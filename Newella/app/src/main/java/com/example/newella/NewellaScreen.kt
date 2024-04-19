@@ -31,7 +31,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.newella.ui.auth.AuthScreen
 import com.example.newella.ui.library.LibraryScreen
+import com.example.newella.ui.profile.ProfileScreen
 import com.example.newella.ui.registration.RegistrationScreen
+import com.example.newella.ui.search.SearchScreen
 import com.example.newella.ui.start.StartScreen
 
 
@@ -40,6 +42,8 @@ enum class NewellaScreen(@StringRes val title: Int) {
     Auth(title = R.string.auth),
     Registration(title = R.string.registration),
     Library(title = R.string.library),
+    Profile(title = R.string.profile),
+    Search(title = R.string.search),
 }
 
 
@@ -70,7 +74,7 @@ fun BottomNavigationBar(navController: NavController) {
                 label = {
                     Text(
                         text = item.label,
-                        fontSize = 12.sp,
+                        fontSize = 10.sp,
                         color = MaterialTheme.colorScheme.onSurface
                     ) },
                 selectedContentColor = MaterialTheme.colorScheme.inversePrimary,
@@ -132,8 +136,23 @@ fun NewellaApp (
                     },
                 )
             }
+            composable(route = NewellaScreen.Registration.name) {
+                RegistrationScreen(
+                    onToAuthClick = {
+                        navController.navigate(NewellaScreen.Auth.name)
+                    },
+                )
+            }
             composable(route = NewellaScreen.Library.name) {
                 LibraryScreen(
+                )
+            }
+            composable(route = NewellaScreen.Profile.name) {
+                ProfileScreen(
+                )
+            }
+            composable(route = NewellaScreen.Search.name) {
+                SearchScreen(
                 )
             }
         }

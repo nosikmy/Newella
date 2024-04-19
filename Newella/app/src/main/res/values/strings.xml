@@ -19,5 +19,13 @@
     <string name="continue_creating">Продолжить создавать</string>
     <string name="rectangle1">Серый прямоугольник</string>
 
+    <string name="profile">Профиль</string>
+    <string name="ellipse1">Серый круг</string>
+    <string name="subscribers">Подписчики</string>
+    <string name="subscribes">Подписки</string>
+    <string name="subscribe">Подписаться</string>
+
+    <string name="search">Поиск</string>
+
 
 </resources>
