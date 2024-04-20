@@ -1,0 +1,515 @@
+host
+    /auth
+        /sign-up (POST - registration)
+            {
+                "username": "coolGuy2003",
+                "email": "someEmail@email.com",
+                "password": "superSecretWord"
+            }
+        -->
+            {
+                "status": 200,
+                "message": "confirm email",
+                "payload":
+                            {
+                                "id": 2
+                            }
+            }
+
+        /sign-in (POST - login)
+            {
+                "email": "someEmail@email.com",
+                "password": "superSecretWord"
+            }
+        -->
+        1. onSuccess
+            {
+                "status": 200,
+                "message": "ok",
+                "payload":
+                            {
+                                "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+                            }
+            }
+        2. ConfirmationNeeded
+            {
+                "status": 400,
+                "message": "confirm email first",
+                "payload": ""
+            }
+
+        /forgotPassword (POST - to change password in case you forgot password)
+            {
+                "email": "someMail@gmail.com",
+                "newPassword": "SOMEPASSWORD"
+            }
+        -->
+            {
+                "status": 200,
+                "message": "sended",
+                "payload": ""
+            }
+
+        /confirm (POST - confirm data that needs to be commited) queryParams: ?{
+                                        type={"confirm", "forgot", "change"}&
+                                        hash="DWQO0DQO9Q8CQ3272H90XJ08JEXR6731*&@(#$*^@(*#()))"
+                                       }
+            {}
+        -->
+        1. onSuccess
+            {
+                "status": 200,
+                "message": "confirmed",
+                "payload": ""
+            }
+        2. WrongData
+            {
+                "status": 400,
+                "message": "invalid link, try to resend confirmation mail",
+                "payload": ""
+            }                                        
+
+    /api
+        /users
+              / (GET - <ONLY FOR ADMIN> - get all users) queryParams: ?{limit=20&page=2}
+                {}
+              -->
+                {
+                    "status": 400,
+                    "message": "confirm email first",
+                    "payload":
+                        {
+                            "count": 128,
+                            "rows":
+                                [
+                                    {
+                                        "id": 2,
+                                        "username": "someGuy23412",
+                                        "realName": "Issac Newton",
+                                        "email": "email@mail.com"
+                                    }
+                                ]
+                        }
+                }
+              /{:id} (GET - <ONLY FOR USER ITSELF OR ADMIN> - get user page (without his novels))
+                {}
+              -->
+                {
+                    "status": 400,
+                    "message": "confirm email first",
+                    "payload":
+                        {
+                            "id": 2,
+                            "username": "someGuy23412",
+                            "realName": "Issac Newton",
+                            "description": "bla bla bla",
+                            "email": "email@mail.com",
+                            "subscribersNumber": 20,
+                            "subscriptionsNumber": 20
+                        }
+                }
+              /{:id} (PATCH - <ONLY FOR USER ITSELF OR ADMIN> - change some user data)
+                <all fields are optional>  
+                {
+                    "username": "some",
+                    "realName": "guy guy guy",
+                    "description": "bla bla bla"
+                }
+              -->
+                {
+                    "status": 200,
+                    "message": "ok",
+                    "payload": ""
+                }
+              /changePassword/{:id} (POST - <FOR USER ITSELF WITH CONFRIMATION OR FOR ADMIN WITHOUT> - change password)
+                {
+                    "oldPassword": "somePassword",
+                    "newPassword": "ASDQWDQS"
+                }
+              -->
+              1. onSuccess
+                {
+                    "status": 200,
+                    "message": "sent",
+                    "payload": ""
+                }
+              2. wrongPassword
+                {
+                    "status": 400,
+                    "message": "wrong password",
+                    "payload": ""
+                }
+              
+              /{:userId}/subscribers/ (GET - to get all users subscribers)
+                {}
+              -->
+                {
+                    "status": 200,
+                    "message": "ok",
+                    "payload": {
+                        "count": 200,
+                        "rows": [
+                            {
+                                "id": 2,
+                                "username": "some_guy",
+                                "image": "somepic.png"
+                            }
+                        ]
+                    }
+                }
+              /{:userId}/subscriptions
+                                    / (GET - to get all users subscriptions)
+                                        {}
+                                    -->
+                                        {
+                                            "status": 200,
+                                            "message": "ok",
+                                            "payload": {
+                                                "count": 200,
+                                                "rows": [
+                                                    {
+                                                        "id": 2,
+                                                        "username": "some_guy",
+                                                        "image": "somepic.png"
+                                                    }
+                                                ]
+                                            }
+                                        }
+
+                                    / (POST - to sub to the {:userId} user from authorized user account)
+                                        {}
+                                    -->
+                                        {
+                                            "status": 200,
+                                            "message": "ok",
+                                            "payload": ""
+                                        }
+
+                                    /{:subId} (DELETE - <ONLY FOR USER ITSELF OR ADMIN> to delete some user from subscriptions)
+                                        {}
+                                    -->
+                                        {
+                                            "status": 200,
+                                            "message": "ok",
+                                            "payload": ""
+                                        }                                    
+              /{:userId}/library
+                                / (GET - to get all users novels
+                                    ("favourite" and "released" - helpful for user profile page, and others - for user personal library)
+                                                                    ) queryParams: ?{
+                                                                                        type=["read", "readable", "favourite", "created", "wip", "released"]
+                                                                                        limit=20
+                                                                                        page=1
+                                                                                    }
+                                    {}
+                                -->
+                                    {
+                                        "status": 200,
+                                        "message": "ok",
+                                        "payload":
+                                            {
+                                                "count": 10,
+                                                "rows":
+                                                    [
+                                                        {
+                                                            "id": 2,
+                                                            "name": "NOVEL",
+                                                            "price": 0
+                                                            "image": "pick.jpeg",
+                                                            "rating": 2.7
+                                                        }
+                                                    ]
+                                            }
+                                    }
+
+        /novels
+                / (GET)     queryParams:    ?{  limit=10
+                                                page=1
+                                                categoryId=2
+                                                priceLow=20
+                                                priceHigh=30
+                                                length="normal"
+                                                authorId=2
+                                                ratingLow=2
+                                                ratingHigh=4.5
+                                                search="cool novel"
+                                                sortBy="price ASC"
+                                            }
+                    {
+                        "tags": ["some_1", "some_2"]
+                    }
+                -->
+                    {
+                        "status": 200,
+                        "message": "ok",
+                        "payload":
+                            {
+                                "count": 10,
+                                "rows":
+                                    [
+                                        {
+                                            "id": 2,
+                                            "name": "NOVEL",
+                                            "price": 0
+                                            "image": "pick.jpeg",
+                                            "rating": 2.7
+                                        }
+                                    ]
+                            }
+                    }   
+
+                /{:id} (GET - to get one novel short info for preview)
+                    {}
+                -->
+                    {
+                        "status": 200,
+                        "message": "ok",
+                        "payload": 
+                            {
+                                "id": 3,
+                                "name": "Some",
+                                "description": "bla bla bla",
+                                "price": 30,
+                                "length": "short",
+                                "status": "ok",
+                                "image": "image.png",
+                                "rating": 3.5,
+                                "categoryId": 3,
+                                "categoryRoute":
+                                    [
+                                        {
+                                            "id": 2,
+                                            "name": "Root category"
+                                        },
+                                        {
+                                            "id": 3,
+                                            "name": "Head category"
+                                        }
+                                    ]
+                                "tags":
+                                    [
+                                        {
+                                            "id": 4,
+                                            "name": "screamers"
+                                        }
+                                    ]
+                            }
+                    } 
+
+                /{:id}/readSlideGroup (GET - to get slides on one group)
+                {
+                    "slideGroupNumber": 2 # user must store current slide and slide group number to locate his reading progress
+                }
+            -->
+                {
+                    "status": 200,
+                    "message": "ok",
+                    "payload": 
+                        "count": 10,
+                        "rows":
+                            [
+                                {
+                                    "id": 2,
+                                    "replica": "What a wonderful weather today!",
+                                    "replicaType": "choice", # if "simple" --> answers are empty
+                                    "answers": [
+                                        {
+                                            "id": 1,
+                                            "name": "Yeah",
+                                        }
+                                    ],
+                                    "sequenceNumber": 2,
+                                    "background":
+                                        {
+                                            "id": 1,
+                                            "name": "Forest",
+                                            "image": "forest.png"
+                                        },
+                                    "heroMood":
+                                        {
+                                            "id": 2,
+                                            "name": "Alex",
+                                            "moodName": "Happy",
+                                            "image": "happyAlex.jpeg"
+                                        },
+                                    "soundTransition":
+                                        {
+                                            "id": 3,
+                                            "name": "happySongStarter",
+                                            "sound": "1.mp3"
+                                        }
+                                }
+                            ]
+                }
+
+                / (POST - to create novel rudiment)
+                    {
+                        "name": "novel 1",
+                        "description": "coll thing",
+                        "price": 0,
+                        "length": "large",
+                        "image": "some.png"
+                    }
+                -->
+                    {
+                        "status": 200,
+                        "message": "ok",
+                        "payload":
+                            {
+                                "id": 10
+                            }
+                    } 
+
+                /{:id} (PATCH - to fill novel rudiment)
+                    <optional fields, but they must be filled somewhen>
+                    {
+                        "name": "novel 1",
+                        "description": "coll thing",
+                        "price": 0,
+                        "length": "large",
+                        "image": "some.png"
+                    }
+                -->
+                    {
+                        "status": 200,
+                        "message": "ok",
+                        "payload": ""
+                    }
+
+                /{:id}/slideGroup
+                                 / (POST - to create slide group)
+                                    {
+                                        "name": "some useful word"
+                                    }
+                                 -->
+                                    {
+                                        "status": 200,
+                                        "message": "ok",
+                                        "payload":
+                                            {
+                                                "id": 1,
+                                            }
+                                    }
+                                
+                                / (GET - to get all slide groups)
+                                /{:slideGroupId} (GET - to get all slides inside one group)
+                                /{:slideGroupId} (DELETE)
+                                /{:slideGroupId} (PATCH - to change name)
+
+                /{:id}/slide
+                            /{:slideId} (GET)
+                            /{:slideGroupId} (POST - to create slide into group)
+                            /{:slideId} (PATCH - expand slide info)
+                            /{:slideId} (DELETE - delete slide)
+                
+                /{:id}/hero
+                            / (GET - to get all heros for current novel)
+                            / (POST - to create new hero)
+                            /{:heroId} (PATCH, DELETE)
+
+                /{:id}/heroMood
+                                /{:heroId} (GET - to get all moods for current hero)
+                                /{:heroId} (POST - to create hero mood for certain hero)
+                                /{:slideId} (PUT - to add hero mood to the slide)
+                                /{:heroMoodId} (DELETE, PATCH)
+
+                /{:id}/background
+                                / (GET - to get all backgrounds for current novel)
+                                / (POST - to create new background)
+                                /{:slideId} (POST - to add background to certain slide)
+                                /{:backgroundId} (PATCH, DELETE)
+
+                /{:id}/sound
+                            / (GET - to get all sound transitions for current novel)
+                            / (POST - to create new sound transition)
+                            /{:slideId} (POST - to add sound transition to certain slide)
+                            /{:soundId} (PATCH, DELETE)
+
+                /{:id}/answer
+                             /{:slideId} (GET - to get all answers to current slide)
+                             /{:slideId} (POST - to create answer)
+                             /{:slideId} (PATCH)
+                             /{:answerId} (DELETE)
+
+                /{:id} (DELETE)
+                    {}
+                -->
+                    {
+                        "status": 200,
+                        "message": "ok",
+                        "payload": ""
+                    } 
+
+                /{:id}/favourites
+                                    /{:userId} (POST - to add novel to user's favs)
+                                        {}
+                                    -->
+                                        {
+                                            "status": 200,
+                                            "message": "ok",
+                                            "payload": ""
+                                        } 
+
+                                    /{:userId} (DELETE - to delete novel from user's favs)
+                                        {}
+                                    -->
+                                        {
+                                            "status": 200,
+                                            "message": "ok",
+                                            "payload": ""
+                                        }
+
+                /{:id}/rate (POST)
+                    {
+                        "rating": 2.7
+                    }
+                -->
+                    {
+                        "status": 200,
+                        "message": "ok",
+                        "payload": ""
+                    }  
+                 
+                /{:id}/complain (POST)
+                    {
+                        "subject": "bad words",
+                        "description": "i am so sensitive, can you please delete these all bad words?"
+                    }
+                -->
+                    {
+                        "status": 200,
+                        "message": "ok",
+                        "payload": ""
+                    } 
+
+                /{:id}/comment (POST)
+                    {
+                        "text": "funny",
+                    }
+                -->
+                    {
+                        "status": 200,
+                        "message": "ok",
+                        "payload": ""
+                    } 
+
+                /{:id}/addToLibrary (POST - to add novel to user library as "readable")
+                    {}
+                -->
+                    {
+                        "status": 200,
+                        "message": "ok",
+                        "payload": ""
+                    }
+                
+                /{:id}/saveProgress (POST - to save reading progress)
+                    {
+                        "slideGroupNumber": 2,
+                        "slideNumber": 10,
+                    }
+                -->
+                    {
+                        "status": 200,
+                        "message": "ok",
+                        "payload": ""
+                    }
