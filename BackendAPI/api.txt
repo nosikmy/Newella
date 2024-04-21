@@ -75,8 +75,8 @@ host
                 {}
               -->
                 {
-                    "status": 400,
-                    "message": "confirm email first",
+                    "status": 200,
+                    "message": "ok",
                     "payload":
                         {
                             "count": 128,
@@ -95,8 +95,8 @@ host
                 {}
               -->
                 {
-                    "status": 400,
-                    "message": "confirm email first",
+                    "status": 200,
+                    "message": "ok",
                     "payload":
                         {
                             "id": 2,
@@ -234,10 +234,9 @@ host
                                                 ratingHigh=4.5
                                                 search="cool novel"
                                                 sortBy="price ASC"
+                                                tags=tag_1,tag_2
                                             }
-                    {
-                        "tags": ["some_1", "some_2"]
-                    }
+                    {}
                 -->
                     {
                         "status": 200,
@@ -316,6 +315,7 @@ host
                                         {
                                             "id": 1,
                                             "name": "Yeah",
+                                            "nextSlideId": 2
                                         }
                                     ],
                                     "sequenceNumber": 2,
@@ -376,7 +376,7 @@ host
                         "payload": ""
                     }
 
-                /{:id}/slideGroup
+                /{:id}/slideGroups
                                  / (POST - to create slide group)
                                     {
                                         "name": "some useful word"
@@ -396,40 +396,39 @@ host
                                 /{:slideGroupId} (DELETE)
                                 /{:slideGroupId} (PATCH - to change name)
 
-                /{:id}/slide
+                /{:id}/slides
                             /{:slideId} (GET)
                             /{:slideGroupId} (POST - to create slide into group)
-                            /{:slideId} (PATCH - expand slide info)
+                            /{:slideId} (PATCH - expand or change slide info)
                             /{:slideId} (DELETE - delete slide)
-                
-                /{:id}/hero
+                            /{:slideId}
+                                        /backgrounds/{:backgroundId} (POST - to add background to certain slide)
+                                        /heroMoods/{:heroMoodId} (POST - to add hero mood to the slide)
+                                        /sounds/{:soundId} (POST - to add sound transition to certain slide)
+                /{:id}/heroes
                             / (GET - to get all heros for current novel)
                             / (POST - to create new hero)
+                            /{:heroId} (GET - to get hero info and all his moods for current hero)
                             /{:heroId} (PATCH, DELETE)
 
-                /{:id}/heroMood
-                                /{:heroId} (GET - to get all moods for current hero)
+                /{:id}/heroMoods
                                 /{:heroId} (POST - to create hero mood for certain hero)
-                                /{:slideId} (PUT - to add hero mood to the slide)
                                 /{:heroMoodId} (DELETE, PATCH)
 
-                /{:id}/background
+                /{:id}/backgrounds
                                 / (GET - to get all backgrounds for current novel)
                                 / (POST - to create new background)
-                                /{:slideId} (POST - to add background to certain slide)
                                 /{:backgroundId} (PATCH, DELETE)
 
-                /{:id}/sound
+                /{:id}/sounds
                             / (GET - to get all sound transitions for current novel)
                             / (POST - to create new sound transition)
-                            /{:slideId} (POST - to add sound transition to certain slide)
                             /{:soundId} (PATCH, DELETE)
 
-                /{:id}/answer
+                /{:id}/answers
                              /{:slideId} (GET - to get all answers to current slide)
                              /{:slideId} (POST - to create answer)
-                             /{:slideId} (PATCH)
-                             /{:answerId} (DELETE)
+                             /{:answerId} (PATCH, DELETE)
 
                 /{:id} (DELETE)
                     {}
@@ -513,3 +512,13 @@ host
                         "message": "ok",
                         "payload": ""
                     }
+
+        /moderation
+                    / (GET - to get all novels with complaints in descending order)
+                    /{:id} (GET - to get certain complaint)
+                    /{:id} (POST - to make a descision about some novel)
+        
+        /admin
+                /filters
+                        / (GET - to get all available filtes)
+                        / (POST - create new filter)
