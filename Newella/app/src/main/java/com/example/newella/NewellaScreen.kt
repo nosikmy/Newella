@@ -31,6 +31,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.newella.ui.auth.AuthScreen
 import com.example.newella.ui.library.LibraryScreen
+import com.example.newella.ui.novel.NovelScreen
 import com.example.newella.ui.profile.ProfileScreen
 import com.example.newella.ui.registration.RegistrationScreen
 import com.example.newella.ui.search.SearchScreen
@@ -44,6 +45,8 @@ enum class NewellaScreen(@StringRes val title: Int) {
     Library(title = R.string.library),
     Profile(title = R.string.profile),
     Search(title = R.string.search),
+    Novel(title = R.string.novel)
+
 }
 
 
@@ -153,6 +156,13 @@ fun NewellaApp (
             }
             composable(route = NewellaScreen.Search.name) {
                 SearchScreen(
+                    onToNovelClick = {
+                        navController.navigate(NewellaScreen.Novel.name)
+                    },
+                )
+            }
+            composable(route = NewellaScreen.Novel.name) {
+                NovelScreen(
                 )
             }
         }

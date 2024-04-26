@@ -2,13 +2,18 @@ package com.example.newella.ui.start
 
 import android.content.Context
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -48,7 +53,7 @@ fun StartScreen(
         )
         Spacer(Modifier.height(32.dp))
         Column (
-            horizontalAlignment = Alignment.CenterHorizontally,
+            //horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ){
             Text(
@@ -56,6 +61,99 @@ fun StartScreen(
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onSurface
             )
+            Spacer(Modifier.height(32.dp))
+
+            Text(
+                text = "Для вас",
+                style = MaterialTheme.typography.titleMedium,
+            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ){
+                Image(
+                    painter = painterResource(id = R.drawable.ellipse1),
+                    contentDescription = stringResource(id = R.string.ellipse1),
+                    modifier = Modifier
+                        .padding(top = 8.dp, bottom = 8.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.ellipse1),
+                    contentDescription = stringResource(id = R.string.ellipse1),
+                    modifier = Modifier
+                        .padding(top = 8.dp, bottom = 8.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.ellipse1),
+                    contentDescription = stringResource(id = R.string.ellipse1),
+                    modifier = Modifier
+                        .padding(top = 8.dp, bottom = 8.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.ellipse1),
+                    contentDescription = stringResource(id = R.string.ellipse1),
+                    modifier = Modifier
+                        .padding(top = 8.dp, bottom = 8.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.ellipse1),
+                    contentDescription = stringResource(id = R.string.ellipse1),
+                    modifier = Modifier
+                        .padding(top = 8.dp, bottom = 8.dp)
+                )
+            }
+            Spacer(Modifier.height(32.dp))
+
+            Text(
+                text = "Новинки от любимых авторов",
+                style = MaterialTheme.typography.titleMedium,
+            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.rectangle2),
+                    contentDescription = stringResource(id = R.string.rectangle2),
+                    modifier = Modifier
+                        .padding(top = 8.dp, bottom = 8.dp)
+                        .size(150.dp, 150.dp)
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.rectangle2),
+                    contentDescription = stringResource(id = R.string.rectangle2),
+                    modifier = Modifier
+                        .padding(top = 8.dp, bottom = 8.dp)
+                        .size(150.dp, 150.dp)
+                )
+            }
+            Spacer(Modifier.height(32.dp))
+
+            Text(
+                text = "Продолжить",
+                style = MaterialTheme.typography.titleMedium,
+            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.rectangle1),
+                    contentDescription = stringResource(id = R.string.rectangle1),
+                    modifier = Modifier
+                        .padding(top = 8.dp, bottom = 8.dp)
+                        .size(150.dp, 150.dp)
+
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.rectangle1),
+                    contentDescription = stringResource(id = R.string.rectangle1),
+                    modifier = Modifier
+                        .padding(top = 8.dp, bottom = 8.dp)
+                        .size(150.dp, 150.dp)
+
+                )
+            }
             Spacer(Modifier.weight(1f))
             Button(
                 modifier = Modifier

@@ -18,6 +18,9 @@
     <string name="continue_reading">Продолжить читать</string>
     <string name="continue_creating">Продолжить создавать</string>
     <string name="rectangle1">Серый прямоугольник</string>
+    <string name="rectangle2">Серый прямоугольник с названием</string>
+    <string name="rectangle3">Серый прямоугольник с воспроизведением</string>
+
 
     <string name="profile">Профиль</string>
     <string name="ellipse1">Серый круг</string>
@@ -26,6 +29,8 @@
     <string name="subscribe">Подписаться</string>
 
     <string name="search">Поиск</string>
+
+    <string name="novel">Новелла</string>
 
 
 </resources>
