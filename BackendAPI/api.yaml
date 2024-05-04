@@ -1549,6 +1549,48 @@ paths:
                     type: string
                     example: ""
 
+  /api/novels/{id}/slides/{slideId}/backsounds/{backsoundId}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 56
+      - name: slideId
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 56
+      - name: backsoundId
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 56
+    post:
+      tags:
+        - novels creation
+      summary: to add background sound to certain slide
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: ok
+                  payload:
+                    type: string
+                    example: ""
+
   /api/novels/{id}/slides/{slideId}/sounds/{soundId}:
     parameters:
       - name: id
