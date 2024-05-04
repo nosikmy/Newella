@@ -2056,6 +2056,161 @@ paths:
                     type: string
                     example: ""
 
+  /api/novels/{id}/backsounds:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 56
+    get:
+      tags:
+        - novels creation
+      summary: to get all background sounds for current novel
+      
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: ok
+                  payload:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: Home
+                        sound:
+                          type: string
+                          example: "sound.mp3"
+
+    post:
+      tags:
+      - novels creation
+      summary: to create new background sound
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: someSound
+                sound:
+                  type: string
+                  format: binary
+                  example: "someSound.mp3"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: ok
+                  payload:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 20
+                
+
+  /api/novels/{id}/sounds/{backsoundId}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 56
+      - name: backsoundId
+        in: path
+        required: true
+        schema:
+          type: integer
+          example: 56
+    patch:
+      tags:
+      - novels creation
+      summary: to change background sound
+      requestBody:
+        required: false
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: someSound
+                sound:
+                  type: string
+                  format: binary
+                  example: "someSound.mp3"
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: ok
+                  payload:
+                    type: string
+                    example: ""
+
+    delete:
+      tags:
+      - novels creation
+      summary: to delete background sound
+      responses:
+        200:
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  message:
+                    type: string
+                    example: ok
+                  payload:
+                    type: string
+                    example: ""
+
+
   /api/novels/{id}/sounds:
     parameters:
       - name: id

@@ -420,6 +420,12 @@ host
                                 / (POST - to create new background)
                                 /{:backgroundId} (PATCH, DELETE)
 
+                /{:id}/backsounds
+                                / (GET - to get all background sounds for current novel)
+                                / (POST - to create new background sound)
+                                /{:backsoundsId} (PATCH, DELETE)   
+
+
                 /{:id}/sounds
                             / (GET - to get all sound transitions for current novel)
                             / (POST - to create new sound transition)
