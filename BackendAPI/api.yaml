@@ -2138,7 +2138,7 @@ paths:
                         example: 20
                 
 
-  /api/novels/{id}/sounds/{backsoundId}:
+  /api/novels/{id}/backsounds/{backsoundId}:
     parameters:
       - name: id
         in: path
